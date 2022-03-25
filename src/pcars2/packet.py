@@ -19,7 +19,10 @@ class Packet(object):
         self.sequenceNumber = sequenceNumber
         self.packetType = packetType
         if hasattr(self.__class__, "STRUCTURE"):
-            self._data = self.__class__.STRUCTURE.read_dict(buf)
+            try:
+                self._data = self.__class__.STRUCTURE.read_dict(buf)
+            except:
+                print("unicodeDecodeError")
         else:
             self._data = {}
 
